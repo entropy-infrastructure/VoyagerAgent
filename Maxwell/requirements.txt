@@ -1,0 +1,16 @@
+tqdm
+langchain
+javascript
+setuptools
+openai
+chardet
+cchardet
+chromadb
+tiktoken
+requests
+setuptools
+gymnasium
+psutil
+plumbum
+pulumi
+pulumi_aws

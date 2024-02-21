@@ -1,0 +1,114 @@
+
+from buffer import AnsibleInventoryBuilder, AnsibleTaskBuilder
+from buffer import AnsibleStack
+
+def pulumi_program()
+    pass
+stack.add(pulumi_program)
+stackstore.deploy("my_stack")
+outputes = stacktore.outputs("my_stack")
+
+def my_ansible_example(ip_address,key_file):
+
+    inventory = AnsibleInventoryBuilder()
+    inventory.add_host("my_host",ip_address,key_file,group="my_group")
+    inventory.add_group("my_group")
+    tasks = AnsibleTaskBuilder()
+    tasks.add_task("install nginx","apt",args={"name": "nginx","state": "present"})
+    tasks.add_task("start nginx","service",args={"name": "nginx","state": "started"})
+    tasks.add_task("enable nginx","service",args={"name": "nginx","enabled": True})
+    tasks.add_task("copy index.html","copy",args={"src": "index.html","dest": "/var/www/html/index.html"})
+    tasks.add_task("restart nginx","service",args={"name": "nginx","state": "restarted"})
+    return {
+        "inventory": inventory,
+        "tasks": tasks
+    }
+
+
+stack = AnsibleStack(**my_ansible_example(**outputs))
+stack.write_files()
+stack.deploy()
+
+
+"""
+# Define Ansible inventory
+inventory_builder = AnsibleInventoryBuilder()
+inventory_builder.add_host(host_name='host1', ip_address='192.168.1.1', key_file="~/.ssh/id_rsa", group='webservers')
+inventory_builder.add_group(group_name='webservers')
+
+# Print Inventory in YAML format
+print(inventory_builder.to_yaml())
+
+# Define Ansible tasks
+task_builder = AnsibleTaskBuilder()
+task_builder.add_task(name='Install Apache', module='yum', args={'name': 'httpd', 'state': 'present'})
+
+# Print Tasks in YAML format
+
+
+"""
+
+
+"""
+# Define Ansible inventory
+inventory_builder = AnsibleInventoryBuilder()
+inventory_builder.add_host(host_name='host2', ip_address='192.168.1.2', key_file="~/.ssh/id_rsa", group='dbservers')
+inventory_builder.add_group(group_name='dbservers')
+
+# Print Inventory in YAML format
+print(inventory_builder.to_yaml())
+
+# Define Ansible tasks
+task_builder = AnsibleTaskBuilder()
+task_builder.add_task(name='Install MySQL', module='yum', args={'name': 'mysql', 'state': 'present'})
+
+"""
+
+"""
+# Define Ansible inventory
+inventory_builder = AnsibleInventoryBuilder()
+inventory_builder.add_host(host_name='host3', ip_address='192.168.1.3', key_file="~/.ssh/id_rsa", group='webservers')
+
+# Print Inventory in YAML format
+print(inventory_builder.to_yaml())
+
+# Define Ansible tasks
+task_builder = AnsibleTaskBuilder()
+task_builder.add_task(name='Ensure Apache is running', module='service', args={'name': 'httpd', 'state': 'started'})
+
+# Print Tasks in YAML format
+print(task_builder.to_yaml())
+
+"""
+
+"""
+# Define Ansible inventory
+inventory_builder = AnsibleInventoryBuilder()
+inventory_builder.add_host(host_name='host4', ip_address='192.168.1.4', key_file="~/.ssh/id_rsa", group='dbservers')
+
+# Print Inventory in YAML format
+print(inventory_builder.to_yaml())
+
+# Define Ansible tasks
+task_builder = AnsibleTaskBuilder()
+task_builder.add_task(name='Ensure MySQL is running', module='service', args={'name': 'mysql', 'state': 'started'})
+
+# Print Tasks in YAML format
+print(task_builder.to_yaml())
+"""
+
+"""
+# Define Ansible inventory
+inventory_builder = AnsibleInventoryBuilder()
+inventory_builder.add_host(host_name='host5', ip_address='192.168.1.5', key_file="~/.ssh/id_rsa", group='webservers')
+
+# Print Inventory in YAML format
+print(inventory_builder.to_yaml())
+
+# Define Ansible tasks
+task_builder = AnsibleTaskBuilder()
+task_builder.add_task(name='Restart Apache', module='service', args={'name': 'httpd', 'state': 'restarted'})
+
+# Print Tasks in YAML format
+print(task_builder.to_yaml())
+"""

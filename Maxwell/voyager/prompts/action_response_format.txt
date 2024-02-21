@@ -1,0 +1,23 @@
+Explain: ...
+Plan:
+1) ...
+2) ...
+3) ...
+...
+Code:
+```python
+#One infrastructure function
+def example_pulumi():
+    #define output_a
+    ...
+
+
+#One ansible function
+def ansible(output_a):
+    #code that uses output a
+    ...
+
+```
+
+Ansible Function Name: ansible_name
+Pulumi Function Name: pulumi_name

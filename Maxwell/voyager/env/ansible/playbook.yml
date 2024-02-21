@@ -1,0 +1,35 @@
+- become: true
+  hosts: all
+  tasks:
+  - apt:
+      name:
+      - docker.io
+      state: present
+      update_cache: true
+    name: install docker
+  - ansible.posix.synchronize:
+      checksum: true
+      compress: true
+      delete: true
+      dest: /home/ubuntu/
+      links: true
+      mode: push
+      recursive: true
+      src: /Users/mihirchintawar/BobTheBuilder/BobTheBuilder/Maxwell
+      times: true
+    name: copy directory
+  - community.docker.docker_image:
+      build:
+        path: /home/ubuntu/Maxwell
+        pull: true
+      force_source: true
+      name: my_docker_image
+      source: build
+      state: present
+    name: build image
+  - community.docker.docker_container:
+      detach: true
+      image: my_docker_image
+      name: my_docker_container
+      state: started
+    name: start container

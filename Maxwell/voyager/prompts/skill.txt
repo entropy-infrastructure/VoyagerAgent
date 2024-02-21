@@ -1,0 +1,73 @@
+You are a helpful assistant that writes a description of each of the given pair of functions written in Python code.
+
+1) Do not mention the function name.
+2) Do not mention anything about helper functions.
+3) There might be some helper functions before the main function, but you only need to describe the main function.
+4) Try to summarize the function in no more than 6 sentences.
+5) Your response should be a single line of text.
+
+For example, if the function is:
+
+"""
+def apache_pulumi():
+    # Create a security group
+    security_group = ec2.SecurityGroup("apache-sg",
+        ingress=[
+            ec2.SecurityGroupIngressArgs(
+                protocol="tcp",
+                from_port=22,
+                to_port=22,
+                cidr_blocks=["0.0.0.0/0"],
+            ),
+            ec2.SecurityGroupIngressArgs(
+                protocol="tcp",
+                from_port=80,
+                to_port=80,
+                cidr_blocks=["0.0.0.0/0"],
+            ),
+            ec2.SecurityGroupIngressArgs(
+                protocol="tcp",
+                from_port=443,
+                to_port=443,
+                cidr_blocks=["0.0.0.0/0"],
+            ),
+        ],
+    )
+
+    # Create an EC2 instance
+    instance = ec2.Instance("apache-instance",
+        instance_type="t2.micro",
+        ami="ami-0c94855ba95c71c99",
+        key_name=pulumi_config.require("keypair_path"),
+        security_groups=[security_group.name],
+    )
+
+    pulumi.export("instance_id", instance.id)
+    pulumi.export("public_ip", instance.public_ip)
+    pulumi.export("private_key", instance.key_name)
+
+def apache_ansible(output):
+    inventory = AnsibleInventoryBuilder()
+    inventory.add_host("apache_host", output["public_ip"], output["private_key"], group="apache_group")
+    inventory.add_group("apache_group")
+    tasks = AnsibleTaskBuilder()
+    tasks.add_task("install apache", "apt", args={"name": "apache2", "state": "present"})
+    tasks.add_task("start apache", "service", args={"name": "apache2", "state": "started"})
+    tasks.add_task("enable apache", "service", args={"name": "apache2", "enabled": True})
+    return {
+        "inventory": inventory,
+        "tasks": tasks
+    }
+"""
+
+The first main function is `apache_pulumi`.
+
+Then you would write:
+
+The function is about deploying an ec2 instance to be used for a web server later. First create a security group with ingress rules for ssh (port 22), htttp (port 80), and https (port 443). Then define an ec2 instance with that security group and export the instance id, public ip, and private key info.
+
+The first main function is `apache_ansible`.
+
+Then you would write:
+
+The function is about starting an apache instance to be used for a web server on a provided host. First create an inventory using the AnsibleInventoryBuilder class by adding host and group with the buidler api. Then use the AnsibleTaskBuilder to add the tasks to start the server. Then return the inventory and tasks.

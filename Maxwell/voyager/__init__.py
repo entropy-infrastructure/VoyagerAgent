@@ -1,0 +1,1 @@
+from .voyager_entry import Voyager as voyager

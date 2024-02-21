@@ -1,0 +1,29 @@
+{
+    "kind": "destroy",
+    "startTime": 1689447426,
+    "message": "readme",
+    "environment": {
+        "exec.kind": "cli",
+        "git.author": "Mihir",
+        "git.author.email": "mihir1003@gmail.com",
+        "git.committer": "Mihir",
+        "git.committer.email": "mihir1003@gmail.com",
+        "git.dirty": "true",
+        "git.head": "d6cc734e479b4e7f79e5c19a598f4c13a302f17b",
+        "git.headName": "refs/heads/master",
+        "pulumi.arch": "arm64",
+        "pulumi.env.PULUMI_CONFIG_PASSPHRASE": "set",
+        "pulumi.os": "darwin",
+        "pulumi.version": "v3.75.0",
+        "updatePlan": "false",
+        "vcs.kind": "github.com",
+        "vcs.owner": "entropy-infra",
+        "vcs.repo": "BobTheBuilder"
+    },
+    "config": {
+        "aws:region": "us-west-2"
+    },
+    "version": 0,
+    "result": "succeeded",
+    "endTime": 1689447426
+}
